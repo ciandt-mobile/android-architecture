@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -21,6 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled=true
+    }
 }
 
 dependencies {
@@ -29,7 +34,13 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_version"
     implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
+
+    // Architecture Components
     implementation "android.arch.lifecycle:extensions:$arch_version"
+
+    // Data Binding
+    kapt "com.android.databinding:compiler:$databinding_version"
 
     // Unit Test
     testImplementation "junit:junit:$junit_version"
