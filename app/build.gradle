@@ -29,6 +29,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_version"
     implementation "com.android.support:design:$support_version"
+    implementation "android.arch.lifecycle:extensions:$arch_version"
 
     // Unit Test
     testImplementation "junit:junit:$junit_version"
