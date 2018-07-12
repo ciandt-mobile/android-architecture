@@ -1,3 +1,3 @@
 package com.ciandt.architecture.entity
 
-data class Task(val title: String, val description: String)
+data class Task(var id: Int, var title: String, var description: String)
