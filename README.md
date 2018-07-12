@@ -1,4 +1,4 @@
-# Best Practices for Using ViewModel [IN PROGRESS...]
+# Android Architecture Components Samples [IN PROGRESS...]
 
 ```
 MIT License
