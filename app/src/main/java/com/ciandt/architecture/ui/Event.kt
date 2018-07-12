@@ -4,25 +4,23 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 
-open class Event<out T>(private val content: T) {
+open class Event<out T>(val data: T) {
 
     var hasBeenHandled = false
-        private set
+         protected set
 
-    fun getContentIfNotHandled(): T? {
-        return if (hasBeenHandled) {
-            null
-        } else {
+    fun subscribe(body: Event<T>.() -> Unit) {
+        if (!hasBeenHandled) {
             hasBeenHandled = true
-            content
+            body(this)
         }
     }
-
-    fun peekContent(): T = content
 }
 
-fun <T> LiveData<Event<T>>.subscribe(owner: LifecycleOwner, body: (T) -> Unit) {
+open class SimpleEvent : Event<Any?>(null)
+
+fun <T: Event<*>> LiveData<T>.subscribe(owner: LifecycleOwner, body: T.() -> Unit) {
     observe(owner, Observer {
-        it?.getContentIfNotHandled()?.let { body(it) }
+        it?.subscribe { body(it) }
     })
 }
